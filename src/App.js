@@ -1,18 +1,13 @@
 // @flow
 import React from 'react';
 import './App.css';
-import SearchBar from 'components/SearchBar';
-import ResultBox from 'components/ResultBox';
-import FavoritesModal from 'components/FavoritesModal';
+import Home from 'views/home';
+
 
 function App() {
 	return (
 		<div className='App'>
-			<header className='App-header'>
-				<FavoritesModal></FavoritesModal>
-				<SearchBar></SearchBar>
-				<ResultBox></ResultBox>
-			</header>
+			<Home></Home>
 		</div>
 	);
 }
