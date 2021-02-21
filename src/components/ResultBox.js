@@ -26,13 +26,15 @@ const ResultBox = (props) => {
 
 	return (
 		<Box className={classes.resultBox}>
-			{props.data.length > 0 ? (
-				props.data.map((id) => {
+			{props.data?.length > 0 ? (
+				props.data.map((post) => {
 					return (
 						<ResultCard
-							key={id}
-							postId={id}
-							favorited={favorites.includes(id)}
+							key={post.id}
+                            title={post.title}
+                            author={post.author}
+                            upvotes={post.upvotes}
+							favorited={props.defaultFavorited ?? favorites.includes(post.id)}
 						></ResultCard>
 					);
 				})

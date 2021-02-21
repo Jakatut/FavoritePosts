@@ -7,11 +7,14 @@ import FavoriteActions from 'actions/FavoriteActions';
 
 const useStyles = makeStyles({
 	resultBox: {
-		height: '80px',
 		backgroundColor: '#e3e3e3',
 		borderRadius: '5px',
 		margin: '10px',
 	},
+    postContent: {
+        position: 'relative',
+        height: '50%',
+    },
 	starSvg: {
 		fill: 'white',
 		stroke: 'black',
@@ -41,12 +44,25 @@ const ResultCard = (props) => {
 	}, [props]);
 
 	return (
-		<Grid
-			container
-			alignItems='center'
-		>
+		<Grid container alignItems='center'>
 			<Grid item xs={11}>
-				<Paper className={classes.resultBox}></Paper>
+				<Paper className={classes.resultBox}>
+					<Grid container className={classes.postContent}>
+						<Grid item>
+							<h5>{props.title}</h5>
+						</Grid>
+						<Grid container>
+							
+
+							<Grid item>
+								<span>{props.author}</span>
+							</Grid>
+							<Grid item>
+								<span>{props.created_utc}</span>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Paper>
 			</Grid>
 			<Grid item xs={1}>
 				<svg

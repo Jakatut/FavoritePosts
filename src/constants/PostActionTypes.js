@@ -1,6 +1,6 @@
 //@flow
-const GET_TOP_10_HOT_POSTS = 'GET_TOP_10_HOT_POSTS';
+const MAP_POST_DATA = 'MAP_POST_DATA';
 
 export const PostActionTypes = {
-    GET_TOP_10_HOT_POSTS,
+    MAP_POST_DATA,
 };

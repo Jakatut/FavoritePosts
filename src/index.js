@@ -7,7 +7,8 @@ import reportWebVitals from 'reportWebVitals';
 import { Provider } from 'react-redux'
 import store from 'stores/index'
 
-localStorage.setItem('favoritePosts', '[1, 2, 3]')
+// localStorage.setItem('favoritePosts', '[1, 2, 3]')
+localStorage.clear();
 
 ReactDOM.render(
   <Provider store={store}>

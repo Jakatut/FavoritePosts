@@ -3,12 +3,12 @@ import {
     PostActionTypes
 } from 'constants/PostActionTypes';
 
-const getTop10HotPosts = (payload) => {
-    return { type: PostActionTypes.GET_TOP_10_HOT_POSTS, payload };
+const mapPostData = (payload) => {
+    return { type: PostActionTypes.MAP_POST_DATA, payload };
 };
 
 const PostActions = {
-    getTop10HotPosts,
+    mapPostData,
 };
 
 export default PostActions;

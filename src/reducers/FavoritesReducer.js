@@ -8,7 +8,7 @@ const initialState = {
 
 const FavoritesReducer = (state = initialState, action) => {
 	const addFavorite = () => {
-		// Local storage only supportsd strings, convert json array to string.
+		// Local storage only supports strings, convert json array to string.
 		let favoritePosts = getFavoritePostsFromLocalStorage();
 		favoritePosts.push(action.payload);
         setFavoritePostsInLocalStorage(favoritePosts);
