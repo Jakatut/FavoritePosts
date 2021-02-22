@@ -1,3 +1,4 @@
+//@flow
 import { PostActions } from 'actions/PostActions'
 import { FavoriteActions } from 'actions/FavoriteActions';
 

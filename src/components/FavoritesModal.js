@@ -1,9 +1,10 @@
+//@flow
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper, Box } from '@material-ui/core';
 import ResultBox from './ResultBox';
 import { makeStyles } from '@material-ui/styles';
-import { CloseOutlined, Print } from '@material-ui/icons';
+import { CloseOutlined } from '@material-ui/icons';
 import FavoriteActions from 'actions/FavoriteActions';
 const axios = require('axios').default;
 

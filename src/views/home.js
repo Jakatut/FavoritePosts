@@ -1,3 +1,4 @@
+//@flow
 import React, { useEffect } from 'react';
 import SearchBar from 'components/SearchBar';
 import ResultBox from 'components/ResultBox';
