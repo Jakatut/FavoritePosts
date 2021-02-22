@@ -11,10 +11,10 @@ const useStyles = makeStyles({
 		borderRadius: '5px',
 		margin: '10px',
 	},
-    postContent: {
-        position: 'relative',
-        height: '50%',
-    },
+	postContent: {
+		position: 'relative',
+		height: '50%',
+	},
 	starSvg: {
 		fill: 'white',
 		stroke: 'black',
@@ -48,17 +48,19 @@ const ResultCard = (props) => {
 			<Grid item xs={11}>
 				<Paper className={classes.resultBox}>
 					<Grid container className={classes.postContent}>
-						<Grid item>
-							<h5>{props.title}</h5>
+						<Grid item xs={2}>
+							<span>Posted by {props.author}</span>
+						</Grid>
+
+						<Grid item xs={10}>
+							<span>{props.title}</span>
 						</Grid>
 						<Grid container>
-							
-
-							<Grid item>
-								<span>{props.author}</span>
+							<Grid item xs={2}>
+								<span>{props.upvotes} upvotes</span>
 							</Grid>
 							<Grid item>
-								<span>{props.created_utc}</span>
+								<span>created at {props.created_utc}</span>
 							</Grid>
 						</Grid>
 					</Grid>

@@ -11,8 +11,8 @@ const removeFavorite = (payload) => {
 	return { type: FavoriteActionTypes.REMOVE_FAVORITE, payload };
 };
 
-const getFavorites = (payload) => {
-	return { type: FavoriteActionTypes.GET_FAVORITES, payload };
+const getFavoriteIds = (payload) => {
+	return { type: FavoriteActionTypes.GET_FAVORITE_IDS, payload };
 };
 
 const clearFavorites = (payload) => {
@@ -23,12 +23,17 @@ const toggleFavorites = (payload) => {
 	return { type: FavoriteActionTypes.TOGGLE_FAVORITES, payload };
 };
 
+const mapPostData = (payload) => {
+    return {type: FavoriteActionTypes.MAP_FAVORITE_POST_DATA, payload};
+};
+
 const FavoriteActions = {
     addFavorite,
     removeFavorite,
-    getFavorites,
+    getFavoriteIds,
     clearFavorites,
     toggleFavorites,
+    mapPostData,
 };
 
 export default FavoriteActions;

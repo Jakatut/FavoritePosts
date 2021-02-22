@@ -13,7 +13,7 @@ const Home = () => {
 
 	useEffect(() => {
 		axios
-			.get(process.env.REACT_APP_REDDIT_API_URL + 'all/hot.json?limit=10')
+			.get(process.env.REACT_APP_REDDIT_API_URL + 'r/all/hot.json?limit=10')
 			.then(({ data }) => {
 				dispatch(PostActions.mapPostData(data));
 			});

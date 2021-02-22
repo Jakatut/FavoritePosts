@@ -7,7 +7,7 @@ const initialState = {
 
 const PostsReducer = (state = initialState, action) => {
 	const mapPostData = () => {
-		let newState = {
+		return {
 			...state,
 			results: action.payload?.data?.children?.map((post) => {
 				return {
@@ -19,7 +19,6 @@ const PostsReducer = (state = initialState, action) => {
 				};
 			}),
 		};
-		return newState;
 	};
 
 	switch (action.type) {

@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 const ResultBox = (props) => {
 	const classes = useStyles();
-	const favorites = useSelector((state) => state.favorites.posts);
+	const favorites = useSelector((state) => state.favorites.ids);
 
 	return (
 		<Box className={classes.resultBox}>
@@ -31,6 +31,7 @@ const ResultBox = (props) => {
 					return (
 						<ResultCard
 							key={post.id}
+                            postId={post.id}
                             title={post.title}
                             author={post.author}
                             upvotes={post.upvotes}
