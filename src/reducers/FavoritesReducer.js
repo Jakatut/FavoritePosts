@@ -8,16 +8,13 @@ const initialState = {
 };
 
 const FavoritesReducer = (state = initialState, action) => {
-
 	const addFavorite = () => {
-		console.log('Adding favorite: ', action.payload);
 		// Local storage only supports strings, convert json array to string.
-		let favoritePosts = getFavoritePostsFromLocalStorage() ?? [];
-        console.log('favoritePosts: ', favoritePosts);
+		let favoritePosts = getFavoritePostsIdsFromLocalStorage() ?? [];
 		if (!favoritePosts.includes(action.payload)) {
 			favoritePosts.push(action.payload);
 		}
-		setFavoritePostsInLocalStorage(favoritePosts);
+		setFavoritePostsIdsInLocalStorage(favoritePosts);
 		return {
 			...state,
 			ids: state.ids.concat(action.payload),
@@ -25,21 +22,23 @@ const FavoritesReducer = (state = initialState, action) => {
 	};
 
 	const removeFavorite = () => {
-		let favoritePosts = getFavoritePostsFromLocalStorage();
-		favoritePosts = favoritePosts.filter((id) => {
-			return id !== action.payload;
-		});
-		setFavoritePostsInLocalStorage(favoritePosts);
-		return { ...state, ids: favoritePosts };
+		const favoritePostsIds = getFavoritePostsIdsFromLocalStorage().filter(
+			(id) => {
+				return id !== action.payload;
+			}
+		);
+		setFavoritePostsIdsInLocalStorage(favoritePostsIds);
+		return {
+			...state,
+			ids: favoritePostsIds,
+            posts: state.posts.filter((post) => {return post.id !== action.payload})
+		};
 	};
 
 	const getFavoriteIds = () => {
-		// Local storage only supports strings, convert to array.
-		let favoritePostIds = getFavoritePostsFromLocalStorage();
-
 		return {
 			...state,
-			ids: favoritePostIds,
+			ids: getFavoritePostsIdsFromLocalStorage(),
 		};
 	};
 
@@ -67,11 +66,11 @@ const FavoritesReducer = (state = initialState, action) => {
 		return { ...state, opened: !state.opened };
 	};
 
-	const getFavoritePostsFromLocalStorage = () => {
+	const getFavoritePostsIdsFromLocalStorage = () => {
 		return JSON.parse(localStorage.getItem('favoritePosts')) ?? [];
 	};
 
-	const setFavoritePostsInLocalStorage = (favoritePosts) => {
+	const setFavoritePostsIdsInLocalStorage = (favoritePosts) => {
 		localStorage.setItem('favoritePosts', JSON.stringify(favoritePosts));
 	};
 

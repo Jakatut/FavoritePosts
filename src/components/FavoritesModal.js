@@ -1,5 +1,5 @@
 //@flow
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper, Box } from '@material-ui/core';
 import ResultBox from './ResultBox';
@@ -14,10 +14,6 @@ const useStyles = makeStyles({
 		width: '75%',
 		position: 'fixed',
 		zIndex: 1000,
-	},
-	rootClosed: {
-		display: 'none',
-		zIndex: -999,
 	},
 	title: {
 		color: 'white',
@@ -46,39 +42,28 @@ const FavoritesModal = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const open = useSelector((state) => state.favorites.opened);
-	const favoritePostIds = useSelector((state) => state.favorites.ids);
-	const favoritePosts = useSelector((state) => state.favorites.posts);
+	let favoritePostIds = useSelector((state) => state.favorites.ids);
+	let favoritePosts = useSelector((state) => state.favorites.posts);
 
 	useEffect(() => {
-		dispatch(FavoriteActions.getFavoriteIds());
-		if (favoritePostIds.length > 0 && open) {
-			axios
-				.get(
-					process.env.REACT_APP_REDDIT_API_URL +
-						'by_id/' +
-						buildFavoritesEndpoint() +
-						'.json',
-					{
-						headers: {
-							"Access-Control-Allow-Origin": "http://localhost:3000",
-						}
-					}
-				)
-				.then(({ data }) => {
-					dispatch(FavoriteActions.mapPostData(data));
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+        dispatch(FavoriteActions.getFavoriteIds())
+		if (favoritePostIds.length === 0) {
+			return;
 		}
-	}, [open]);
-
-	const buildFavoritesEndpoint = () => {
-        console.log(favoritePostIds);
-		let idList = 't3_' + favoritePostIds.join(',t3_')
-        console.log(idList);
-        return idList;
-	};
+		axios
+			.get(
+				process.env.REACT_APP_REDDIT_API_URL +
+					'/by_id/' +
+					favoritePostIds.join(',') +
+					'.json'
+			)
+			.then(({ data }) => {
+				dispatch(FavoriteActions.mapPostData(data));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+    }, []);
 
 	return (
 		<Paper className={open ? classes.rootOpen : classes.rootClosed}>
@@ -90,10 +75,7 @@ const FavoritesModal = () => {
 			</div>
 			<h1 className={classes.title}>Your Favorite Posts</h1>
 			<Box className={classes.resultBoxContainer}>
-				<ResultBox
-					data={favoritePosts}
-					defaultFavorited={true}
-				></ResultBox>
+				<ResultBox data={favoritePosts} id={'favorites'}></ResultBox>
 			</Box>
 		</Paper>
 	);

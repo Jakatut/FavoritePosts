@@ -11,21 +11,25 @@ const axios = require('axios').default;
 const Home = () => {
 	const posts = useSelector((state) => state.posts.results);
 	const dispatch = useDispatch();
+	const favoritesModalOpen = useSelector((state) => state.favorites.opened);
+
 
 	useEffect(() => {
 		axios
 			.get(process.env.REACT_APP_REDDIT_API_URL + 'r/all/hot.json?limit=10')
 			.then(({ data }) => {
 				dispatch(PostActions.mapPostData(data));
-			});
+			}).catch(error => {
+                console.log(error);
+            });
 	}, []);
 
 	return (
 		<header className='App-header'>
 			<FavoritesButton></FavoritesButton>
-			<FavoritesModal></FavoritesModal>
+			{favoritesModalOpen ? <FavoritesModal></FavoritesModal> : <></>}
 			<SearchBar></SearchBar>
-			<ResultBox data={posts}></ResultBox>
+			<ResultBox data={posts} id={'posts'}></ResultBox>
 		</header>
 	);
 };

@@ -1,9 +1,10 @@
 // @flow
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import ResultCard from 'components/ResultCard';
 import { Box } from '@material-ui/core';
+import FavoriteActions from 'actions/FavoriteActions';
 
 const useStyles = makeStyles({
 	resultBox: {
@@ -23,6 +24,11 @@ const useStyles = makeStyles({
 const ResultBox = (props) => {
 	const classes = useStyles();
 	const favorites = useSelector((state) => state.favorites.ids);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(FavoriteActions.getFavoriteIds())
+    }, [])
 
 	return (
 		<Box className={classes.resultBox}>
@@ -30,12 +36,12 @@ const ResultBox = (props) => {
 				props.data.map((post) => {
 					return (
 						<ResultCard
-							key={post.id}
+							key={post.id + props.id}
                             postId={post.id}
                             title={post.title}
                             author={post.author}
                             upvotes={post.upvotes}
-							favorited={props.defaultFavorited ?? favorites.includes(post.id)}
+							favorited={favorites.includes(post.id)}
 						></ResultCard>
 					);
 				})

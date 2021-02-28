@@ -11,7 +11,7 @@ const PostsReducer = (state = initialState, action) => {
 			...state,
 			results: action.payload?.data?.children?.map((post) => {
 				return {
-					id: post.data.id,
+					id: 't3_' + post.data.id,
 					title: post.data.title,
 					author: post.data.author,
 					upvotes: post.data.ups,

@@ -19,8 +19,9 @@ const SearchBar = () => {
 		return axios
 			.get(
 				process.env.REACT_APP_REDDIT_API_URL +
-					event.value +
-					'r/hot.json?limit=10'
+					'r/' +
+                    event.value +
+                    '/hot.json?limit=10'
 			)
 			.then(({ data }) => {
 				dispatch(PostActions.getTop10HotPosts(data));

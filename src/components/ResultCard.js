@@ -23,25 +23,16 @@ const useStyles = makeStyles({
 });
 
 const ResultCard = (props) => {
-	const [favorited, setFavorited] = useState(false);
-	const [postId, setPostId] = useState('');
-
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
 	const onStarClick = () => {
-		if (!favorited) {
-			dispatch(FavoriteActions.addFavorite(postId));
-		} else {
-			dispatch(FavoriteActions.removeFavorite(postId));
+		if (!props.favorited) {
+			dispatch(FavoriteActions.addFavorite(props.postId));
+        } else {
+			dispatch(FavoriteActions.removeFavorite(props.postId));
 		}
-		setFavorited(!favorited);
 	};
-
-	useEffect(() => {
-		setPostId(props.postId);
-		setFavorited(props.favorited ?? false);
-	}, [props]);
 
 	return (
 		<Grid container alignItems='center'>
@@ -80,7 +71,7 @@ const ResultCard = (props) => {
 						d='M24 3.23607L28.6618 17.5836L28.8863 18.2746H29.6129H44.6987L32.494 27.1418L31.9062 27.5689L32.1307 28.2599L36.7925 42.6074L24.5878 33.7401L24 33.3131L23.4122 33.7401L11.2075 42.6074L15.8693 28.2599L16.0938 27.5689L15.506 27.1418L3.30127 18.2746H18.3871H19.1137L19.3382 17.5836L24 3.23607Z'
 						stroke='black'
 						strokeWidth='2'
-						fill={favorited ? 'gold' : 'white'}
+						fill={props.favorited ? 'gold' : 'white'}
 					/>
 				</svg>
 			</Grid>
