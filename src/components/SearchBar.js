@@ -30,16 +30,16 @@ const SearchBar = () => {
 					'/hot.json?limit=10'
 			)
 			.then(({ data }) => {
-				dispatch(PostActions.mapPostData(data));
+				dispatch(PostActions.getPostData(data));
 			});
 	};
 
 	return (
 		<Grid container className={classes.search} justify='space-between' alignItems='center'>
-			<Grid item md={8}>
-				<TextField variant='filled' fullWidth type='text' placeholder='Search a subreddit' className={classes.input} onChange={e => setSubreddit(e.target.value)}></TextField>
+			<Grid item xs={8}>
+				<TextField variant='filled' fullWidth type='text' placeholder='Search a subreddit' className={classes.input} onChange={e => setSubreddit(e.target.value)} />
 			</Grid>
-			<Grid item xs={3} >
+			<Grid item xs={3}>
 				<Button variant='contained' fullWidth centerRipple onClick={onSubredditSearch}>
 					Search
 				</Button>

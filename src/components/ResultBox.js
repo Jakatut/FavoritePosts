@@ -43,6 +43,7 @@ const ResultBox = (props) => {
                             upvotes={post.upvotes}
                             createdAt={post.created_utc}
                             link={post.link}
+                            thumbnail={post.thumbnail}
 							favorited={favorites.includes(post.id)}
 						></ResultCard>
 					);

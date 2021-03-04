@@ -42,7 +42,7 @@ const FavoritesReducer = (state = initialState, action) => {
 		};
 	};
 
-	const mapPostData = () => {
+	const getFavoritePostData = () => {
 		return {
 			...state,
 			posts: action.payload?.data?.children?.map((post) => {
@@ -52,7 +52,8 @@ const FavoritesReducer = (state = initialState, action) => {
 					author: post.data.author,
 					upvotes: post.data.ups,
 					created_utc: post.data.created_utc,
-                    link: process.env.REACT_APP_REDDIT_API_URL + post.data.subreddit_name_prefixed + '/comments/' + post.data.id + post.data.title.replaceAll(' ', '_')
+                    link: process.env.REACT_APP_REDDIT_API_URL + post.data.subreddit_name_prefixed + '/comments/' + post.data.id + post.data.title.replaceAll(' ', '_'),
+                    thumbnail: post.data.thumbnail === 'self' || post.data.thumbnail === 'default' ? undefined : post.data.thumbnail,
 				};
 			}),
 		};
@@ -86,8 +87,8 @@ const FavoritesReducer = (state = initialState, action) => {
 			return clearFavorites();
 		case FavoriteActionTypes.TOGGLE_FAVORITES:
 			return toggleFavorites();
-		case FavoriteActionTypes.MAP_FAVORITE_POST_DATA:
-			return mapPostData();
+		case FavoriteActionTypes.GET_FAVORITE_POST_DATA:
+			return getFavoritePostData();
 		default:
 			break;
 	}

@@ -1,32 +1,31 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Typography } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import FavoriteActions from 'actions/FavoriteActions';
 
 const useStyles = makeStyles({
-    link: {
-        textDecoration: 'none',
-    },
+	link: {
+		textDecoration: 'none',
+	},
 	resultBox: {
 		backgroundColor: '#e3e3e3',
 		borderRadius: '5px',
 		margin: '10px',
-	},
-	postContent: {
-		position: 'relative',
-		height: '50%',
 		padding: '10px',
 	},
 	starSvg: {
 		fill: 'white',
 		stroke: 'black',
 		strokeWidth: 5,
-        cursor: 'pointer'
+		cursor: 'pointer',
 	},
 	title: {
 		marginBottom: '10px',
+	},
+	image: {
+		height: '100px',
 	},
 });
 
@@ -52,24 +51,48 @@ const ResultCard = (props) => {
 			<Grid item xs={11}>
 				<a href={props.link} className={classes.link}>
 					<Paper className={classes.resultBox}>
-						<Grid
-							container
-							direction='column'
-							justify='space-between'
-							className={classes.postContent}
-						>
-							<Grid item lg={12} className={classes.title}>
-								<h4>{props.title}</h4>
+						<Grid container>
+							<Grid item xs={2}>
+                                
+								{typeof props.thumbnail !== 'undefined' ? (
+									<img
+										className={classes.image}
+										src={props.thumbnail}
+										alt={'thumbnail'}
+									/>
+								) : (
+									<></>
+								)}
 							</Grid>
-							<Grid container>
-								<Grid item xs={4}>
-									<span>{props.upvotes} <b>Upvotes</b></span>
-								</Grid>
-								<Grid item xs={4}>
-									<span><b>Posted by:</b> {props.author}</span>
-								</Grid>
-								<Grid item xs={4}>
-									<span><b>Created On: </b> {getFormattedDate()}</span>
+							<Grid item xs={10} container direction='column'>
+								<Grid item container>
+									<Grid
+										item
+										lg={12}
+										className={classes.title}
+									>
+										<Typography variant='h5'>
+											{props.title}
+										</Typography>
+									</Grid>
+									<Grid item container direction='row'>
+										<Grid item xs={4}>
+											<Typography variant='body1'>
+												{props.upvotes} <b>Upvotes</b>
+											</Typography>
+										</Grid>
+										<Grid item xs={4}>
+											<Typography variant='body1'>
+												<b>Posted by:</b> {props.author}
+											</Typography>
+										</Grid>
+										<Grid item xs={4}>
+											<Typography variant='body1'>
+												<b>Created On: </b>{' '}
+												{getFormattedDate()}
+											</Typography>
+										</Grid>
+									</Grid>
 								</Grid>
 							</Grid>
 						</Grid>

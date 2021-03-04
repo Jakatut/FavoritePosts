@@ -17,7 +17,7 @@ const Home = () => {
 		axios
 			.get(process.env.REACT_APP_REDDIT_API_URL + 'r/all/hot.json?limit=10')
 			.then(({ data }) => {
-				dispatch(PostActions.mapPostData(data));
+				dispatch(PostActions.getPostData(data));
 			}).catch(error => {
                 console.log(error);
             });

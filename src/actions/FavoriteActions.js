@@ -23,8 +23,8 @@ const toggleFavorites = (payload) => {
 	return { type: FavoriteActionTypes.TOGGLE_FAVORITES, payload };
 };
 
-const mapPostData = (payload) => {
-    return {type: FavoriteActionTypes.MAP_FAVORITE_POST_DATA, payload};
+const getFavoritePostData = (payload) => {
+    return {type: FavoriteActionTypes.GET_FAVORITE_POST_DATA, payload};
 };
 
 const FavoriteActions = {
@@ -33,7 +33,7 @@ const FavoriteActions = {
     getFavoriteIds,
     clearFavorites,
     toggleFavorites,
-    mapPostData,
+    getFavoritePostData,
 };
 
 export default FavoriteActions;

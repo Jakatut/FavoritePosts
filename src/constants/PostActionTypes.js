@@ -1,8 +1,6 @@
 //@flow
-const MAP_POST_DATA = 'MAP_POST_DATA';
-const SET_SUBREDDIT = 'SET_SUBREDDIT';
+const GET_POST_DATA = 'GET_POST_DATA';
 
 export const PostActionTypes = {
-    MAP_POST_DATA,
-    SET_SUBREDDIT,
+    GET_POST_DATA,
 };

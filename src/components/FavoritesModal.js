@@ -58,7 +58,7 @@ const FavoritesModal = () => {
 					'.json'
 			)
 			.then(({ data }) => {
-				dispatch(FavoriteActions.mapPostData(data));
+				dispatch(FavoriteActions.getFavoritePostData(data));
 			})
 			.catch((error) => {
 				console.log(error);
