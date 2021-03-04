@@ -13,7 +13,6 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const favoritesModalOpen = useSelector((state) => state.favorites.opened);
 
-
 	useEffect(() => {
 		axios
 			.get(process.env.REACT_APP_REDDIT_API_URL + 'r/all/hot.json?limit=10')

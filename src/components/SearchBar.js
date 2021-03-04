@@ -1,40 +1,50 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { useDispatch } from 'react-redux';
 import PostActions from 'actions/PostActions';
+import { Button, Grid, TextField } from '@material-ui/core';
 const axios = require('axios');
 
 const useStyles = makeStyles({
 	search: {
 		width: '80%',
 	},
+    input: {
+        backgroundColor: 'white',
+        borderRadius: '10px',
+    },
 });
 
 const SearchBar = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
+    const [subreddit, setSubreddit] = useState('all');
 
 	const onSubredditSearch = (event) => {
 		return axios
 			.get(
 				process.env.REACT_APP_REDDIT_API_URL +
 					'r/' +
-                    event.value +
-                    '/hot.json?limit=10'
+					subreddit +
+					'/hot.json?limit=10'
 			)
 			.then(({ data }) => {
-				dispatch(PostActions.getTop10HotPosts(data));
+				dispatch(PostActions.mapPostData(data));
 			});
 	};
 
 	return (
-		<input
-			type='text'
-			placeholder='Search a subreddit'
-			className={classes.search}
-			onKeyPress={(e) => onSubredditSearch}
-		></input>
+		<Grid container className={classes.search} justify='space-between' alignItems='center'>
+			<Grid item md={8}>
+				<TextField variant='filled' fullWidth type='text' placeholder='Search a subreddit' className={classes.input} onChange={e => setSubreddit(e.target.value)}></TextField>
+			</Grid>
+			<Grid item xs={3} >
+				<Button variant='contained' fullWidth centerRipple onClick={onSubredditSearch}>
+					Search
+				</Button>
+			</Grid>
+		</Grid>
 	);
 };
 

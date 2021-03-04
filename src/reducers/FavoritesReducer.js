@@ -52,6 +52,7 @@ const FavoritesReducer = (state = initialState, action) => {
 					author: post.data.author,
 					upvotes: post.data.ups,
 					created_utc: post.data.created_utc,
+                    link: process.env.REACT_APP_REDDIT_API_URL + post.data.subreddit_name_prefixed + '/comments/' + post.data.id + post.data.title.replaceAll(' ', '_')
 				};
 			}),
 		};

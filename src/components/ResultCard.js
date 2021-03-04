@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 import FavoriteActions from 'actions/FavoriteActions';
 
 const useStyles = makeStyles({
+    link: {
+        textDecoration: 'none',
+    },
 	resultBox: {
 		backgroundColor: '#e3e3e3',
 		borderRadius: '5px',
@@ -14,11 +17,16 @@ const useStyles = makeStyles({
 	postContent: {
 		position: 'relative',
 		height: '50%',
+		padding: '10px',
 	},
 	starSvg: {
 		fill: 'white',
 		stroke: 'black',
 		strokeWidth: 5,
+        cursor: 'pointer'
+	},
+	title: {
+		marginBottom: '10px',
 	},
 });
 
@@ -29,34 +37,46 @@ const ResultCard = (props) => {
 	const onStarClick = () => {
 		if (!props.favorited) {
 			dispatch(FavoriteActions.addFavorite(props.postId));
-        } else {
+		} else {
 			dispatch(FavoriteActions.removeFavorite(props.postId));
 		}
+	};
+
+	const getFormattedDate = () => {
+		let date = new Date(props.createdAt * 1000);
+		return date.toLocaleString();
 	};
 
 	return (
 		<Grid container alignItems='center'>
 			<Grid item xs={11}>
-				<Paper className={classes.resultBox}>
-					<Grid container className={classes.postContent}>
-						<Grid item xs={2}>
-							<span>Posted by {props.author}</span>
-						</Grid>
-
-						<Grid item xs={10}>
-							<span>{props.title}</span>
-						</Grid>
-						<Grid container>
-							<Grid item xs={2}>
-								<span>{props.upvotes} upvotes</span>
+				<a href={props.link} className={classes.link}>
+					<Paper className={classes.resultBox}>
+						<Grid
+							container
+							direction='column'
+							justify='space-between'
+							className={classes.postContent}
+						>
+							<Grid item lg={12} className={classes.title}>
+								<h4>{props.title}</h4>
 							</Grid>
-							<Grid item>
-								<span>created at {props.created_utc}</span>
+							<Grid container>
+								<Grid item xs={4}>
+									<span>{props.upvotes} <b>Upvotes</b></span>
+								</Grid>
+								<Grid item xs={4}>
+									<span><b>Posted by:</b> {props.author}</span>
+								</Grid>
+								<Grid item xs={4}>
+									<span><b>Created On: </b> {getFormattedDate()}</span>
+								</Grid>
 							</Grid>
 						</Grid>
-					</Grid>
-				</Paper>
+					</Paper>
+				</a>
 			</Grid>
+
 			<Grid item xs={1}>
 				<svg
 					width='48'
