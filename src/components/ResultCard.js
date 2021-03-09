@@ -20,12 +20,10 @@ const useStyles = makeStyles({
 		stroke: 'black',
 		strokeWidth: 5,
 		cursor: 'pointer',
+        marginRight: '20px',
 	},
 	title: {
 		marginBottom: '10px',
-	},
-	image: {
-		height: '100px',
 	},
 });
 
@@ -51,8 +49,8 @@ const ResultCard = (props) => {
 			<Grid item xs={11}>
 				<a href={props.link} className={classes.link}>
 					<Paper className={classes.resultBox}>
-						<Grid container>
-							<Grid item xs={2}>
+						<Grid container alignContent='center'>
+							<Grid item sm={12}>
                                 
 								{typeof props.thumbnail !== 'undefined' ? (
 									<img
@@ -64,7 +62,7 @@ const ResultCard = (props) => {
 									<></>
 								)}
 							</Grid>
-							<Grid item xs={10} container direction='column'>
+							<Grid item container>
 								<Grid item container>
 									<Grid
 										item
@@ -75,18 +73,18 @@ const ResultCard = (props) => {
 											{props.title}
 										</Typography>
 									</Grid>
-									<Grid item container direction='row'>
-										<Grid item xs={4}>
+									<Grid item container justify='space-around'>
+										<Grid item lg={4}>
 											<Typography variant='body1'>
 												{props.upvotes} <b>Upvotes</b>
 											</Typography>
 										</Grid>
-										<Grid item xs={4}>
+										<Grid item lg={4}>
 											<Typography variant='body1'>
 												<b>Posted by:</b> {props.author}
 											</Typography>
 										</Grid>
-										<Grid item xs={4}>
+										<Grid item lg={4}>
 											<Typography variant='body1'>
 												<b>Created On: </b>{' '}
 												{getFormattedDate()}
